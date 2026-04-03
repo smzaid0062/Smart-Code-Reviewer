@@ -1,14 +1,15 @@
 import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-// import webhookController from "./controllers/webhook.controller.js";
-// import validateWebhook from "./middlewares/validateWebhook.js";
+import handleWebhook from "./controllers/webhook.controller.js";
+import validateWebhook from "./middlewares/validateWebhook.js";
 import logger from "./utils/logger.js";
 
 const app = express();
 
 // Security headers
 app.use(helmet());
+app.set("trust proxy", 1);
 
 // Rate limiting — max 60 requests per minute per IP
 const limiter = rateLimit({
@@ -26,7 +27,7 @@ app.get("/health", (req, res) => {
 });
 
 // Webhook route
-// app.post("/webhook", validateWebhook, webhookController.handleWebhook);
+app.post("/webhook", validateWebhook, handleWebhook);
 
 // 404 handler
 app.use((req, res) => {
