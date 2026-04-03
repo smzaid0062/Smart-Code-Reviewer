@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # folder structure
 
 smart-code-reviewer/
@@ -29,3 +30,6 @@ npm install winston express-rate-limit helmet
 Package         -> Purpose 
 winston         -> Professional logging (not just console.log)
 helmet          -> Security headers for Expressexpress-rate-limit -> Prevent webhook abuse
+=======
+# Smart-Code-Reviewer
+>>>>>>> 40f3fbde6a22fa53f03078ad5be660be5f7bd943
