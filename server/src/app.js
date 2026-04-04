@@ -1,7 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import handleWebhook from "./controllers/webhook.controller.js";
+import {handleWebhook} from "./controllers/webhook.controller.js";
 import validateWebhook from "./middlewares/validateWebhook.js";
 import logger from "./utils/logger.js";
 

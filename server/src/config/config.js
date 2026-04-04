@@ -1,18 +1,12 @@
-import "dotenv/config";
-
-/**
- * Central configuration module.
- * Validates all required environment variables at startup.
- * Throws immediately if any are missing — fail fast principle.
- */
+import dotenv from "dotenv";
+dotenv.config();
 
 const requiredEnvVars = [
   "GITHUB_WEBHOOK_SECRET",
   "GITHUB_TOKEN",
-  "ANTHROPIC_API_KEY",
+  "GROQ_API_KEY", 
 ];
 
-// Fail fast — crash on startup if any required env var is missing
 const missingVars = requiredEnvVars.filter((key) => !process.env[key]);
 
 if (missingVars.length > 0) {
@@ -26,18 +20,15 @@ if (missingVars.length > 0) {
 const config = {
   env: process.env.NODE_ENV || "development",
   port: parseInt(process.env.PORT, 10) || 3000,
-
   github: {
     webhookSecret: process.env.GITHUB_WEBHOOK_SECRET,
     token: process.env.GITHUB_TOKEN,
   },
-
-  anthropic: {
-    apiKey: process.env.ANTHROPIC_API_KEY,
-    model: "claude-sonnet-4-20250514",
+  groq: {
+    apiKey: process.env.GROQ_API_KEY,
+    model: "llama-3.3-70b-versatile",
     maxTokens: 1500,
   },
-
   rateLimit: {
     windowMs: 60 * 1000,
     max: 60,
