@@ -29,3 +29,17 @@ npm install winston express-rate-limit helmet
 Package         -> Purpose 
 winston         -> Professional logging (not just console.log)
 helmet          -> Security headers for Expressexpress-rate-limit -> Prevent webhook abuse
+
+
+
+
+#------------------------------
+Week 1 Summary ✅
+FeatureStatusExpress server with ESM✅
+Helmet security headers✅
+Rate limiting✅
+Env var validation✅
+Winston logger✅
+Webhook signature validation✅
+GitHub ping received✅
+GitHub green tick✅
