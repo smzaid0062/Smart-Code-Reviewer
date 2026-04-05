@@ -28,8 +28,11 @@ const config = {
     webhookSecret: process.env.GITHUB_WEBHOOK_SECRET,
     appId: process.env.GITHUB_APP_ID,
     clientId: process.env.GITHUB_APP_CLIENT_ID,
-    // Private key directly env var se aayegi
-    privateKey: process.env.GITHUB_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    // Handle both \n string and actual newlines
+    privateKey: process.env.GITHUB_PRIVATE_KEY
+      .replace(/\\n/g, "\n")
+      .replace(/["']/g, "")
+      .trim(),
   },
 
   groq: {
