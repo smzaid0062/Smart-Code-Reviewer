@@ -6,7 +6,7 @@ const requiredEnvVars = [
   "GITHUB_WEBHOOK_SECRET",
   "GITHUB_APP_ID",
   "GITHUB_APP_CLIENT_ID",
-  "GITHUB_PRIVATE_KEY_PATH",
+  "GITHUB_PRIVATE_KEY",
   "GROQ_API_KEY",
 ];
 
@@ -20,26 +20,16 @@ if (missingVars.length > 0) {
   );
 }
 
-// Private key file read karo
-let privateKey;
-try {
-  privateKey = readFileSync(process.env.GITHUB_PRIVATE_KEY_PATH, "utf8");
-} catch (err) {
-  throw new Error(
-    `Failed to read private key from: ${process.env.GITHUB_PRIVATE_KEY_PATH}\nMake sure private-key.pem exists in your project root.`
-  );
-}
-
 const config = {
   env: process.env.NODE_ENV || "development",
   port: parseInt(process.env.PORT, 10) || 3000,
 
   github: {
     webhookSecret: process.env.GITHUB_WEBHOOK_SECRET,
-    token: process.env.GITHUB_TOKEN,
     appId: process.env.GITHUB_APP_ID,
     clientId: process.env.GITHUB_APP_CLIENT_ID,
-    privateKey,
+    // Private key directly env var se aayegi
+    privateKey: process.env.GITHUB_PRIVATE_KEY.replace(/\\n/g, "\n"),
   },
 
   groq: {
