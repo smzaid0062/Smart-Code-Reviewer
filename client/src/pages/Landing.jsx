@@ -62,7 +62,7 @@ export default function Landing() {
         {/* CTA Buttons */}
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <a
-          href="https://github.com/apps/z-codereview"
+          href="https://github.com/apps/MergeXel/installations/new"
           target="_blank"
           rel="noreferrer"
           className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30 hover:scale-105"
@@ -144,7 +144,7 @@ export default function Landing() {
           Install MergeXel for free and get AI reviews on every PR.
         </p>
         <a
-          href="https://github.com/apps/z-codereview"
+          href="https://github.com/apps/MergeXel/installations/new"
           target="_blank"
           rel="noreferrer"
           className="inline-block bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold px-10 py-3.5 rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30 hover:scale-105"
