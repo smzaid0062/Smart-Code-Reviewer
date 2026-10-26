@@ -1,0 +1,34 @@
+services:
+  backend:
+    image: ${smzaid321}/codereview-backend:${codereview-backend:-latest}
+    container_name: codereview_backend
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: production
+    expose:
+      - "3000"
+    volumes:
+      - backend_data:/app/data
+      - backend_logs:/app/logs
+    networks:
+      - codereview_network
+    restart: unless-stopped
+
+  frontend:
+    image: ${smzaid321}/codereview-frontend:${codereview-frontend:-latest}
+    container_name: codereview_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - codereview_network
+    restart: unless-stopped
+
+networks:
+  codereview_network:
+
+volumes:
+  backend_data:
+  backend_logs:
