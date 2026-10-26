@@ -1,0 +1,60 @@
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: codereview_backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./server/.env
+    volumes:
+      - backend_data:/app/data
+      - backend_logs:/app/logs
+    
+    networks:
+      - codereview_network
+
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/ || exit 1"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: codereview_frontend
+    ports:
+      - "8000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    
+    networks:
+      - codereview_network
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+
+networks:
+  codereview_network:
+    driver: bridge
+
+
+volumes:
+  backend_data:
+  backend_logs:
