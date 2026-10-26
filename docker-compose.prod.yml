@@ -3,7 +3,7 @@ services:
     image: ${smzaid321}/codereview-backend:${codereview-backend:-latest}
     container_name: codereview_backend
     env_file:
-      - ./backend/.env
+      - ./server/.env
     environment:
       NODE_ENV: production
     expose:
