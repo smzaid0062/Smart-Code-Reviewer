@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ${smzaid321}/codereview-backend:${codereview-backend:-latest}
+    image: smzaid321/codereview-backend:${IMAGE_TAG:-latest}
     container_name: codereview_backend
     env_file:
       - ./server/.env
@@ -11,17 +11,24 @@ services:
     volumes:
       - backend_data:/app/data
       - backend_logs:/app/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
     networks:
       - codereview_network
     restart: unless-stopped
 
   frontend:
-    image: ${smzaid321}/codereview-frontend:${codereview-frontend:-latest}
+    image: smzaid321/codereview-frontend:${IMAGE_TAG:-latest}
     container_name: codereview_frontend
     ports:
-      - "80:80"
+      - "8000:8080"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - codereview_network
     restart: unless-stopped
