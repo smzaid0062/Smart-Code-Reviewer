@@ -6,6 +6,8 @@ import logger from "./src/utils/logger.js";
 const PORT = config.port;
 dotenv.config();
 
+app.get('/health', (req, res) => res.status(200).send('ok'));
+
 app.listen(PORT, () => {
   logger.info(`🚀 Server running on port ${PORT} in ${config.env} mode`);
 });
